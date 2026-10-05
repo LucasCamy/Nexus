@@ -1,0 +1,66 @@
+/*
+ * NEXUS design tokens.
+ * Source of truth: DESIGN.md. Components consume these through Tailwind
+ * (see @theme inline in globals.css) or directly via var().
+ */
+:root {
+  /* Neutrals */
+  --bg: #05080c;
+  --bg-raised: #080d13;
+  --surface: #0b121a;
+  --surface-2: #101a24;
+  --surface-3: #16222e;
+  --petrol: #0c2830;
+  --line: rgba(190, 220, 255, 0.08);
+  --line-strong: rgba(190, 220, 255, 0.16);
+  --text: #e4edf5;
+  --text-muted: #93a4b6;
+  --text-dim: #7a8ca3;
+
+  /* Brand accent (single) */
+  --signal: #4fd8eb;
+  --signal-ink: #03181c;
+  --signal-soft: rgba(79, 216, 235, 0.12);
+
+  /* Semantic states */
+  --ok: #a6e35e;
+  --ok-soft: rgba(166, 227, 94, 0.12);
+  --warn: #f2b544;
+  --warn-soft: rgba(242, 181, 68, 0.12);
+  --crit: #ff6b5e;
+  --crit-soft: rgba(255, 107, 94, 0.12);
+  --info: #8fa8ff;
+
+  /* Radii */
+  --r-xs: 4px;
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 22px;
+
+  /* Elevation (blue-tinted) */
+  --hl: inset 0 1px 0 rgba(220, 240, 255, 0.05);
+  --shadow-1: var(--hl), 0 1px 2px rgba(0, 8, 20, 0.4);
+  --shadow-2: var(--hl), 0 12px 32px -12px rgba(0, 10, 25, 0.7);
+  --shadow-3: var(--hl), 0 40px 80px -24px rgba(0, 12, 30, 0.85);
+  --glow-signal: 0 0 0 1px rgba(79, 216, 235, 0.4), 0 0 24px -4px rgba(79, 216, 235, 0.45);
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-exit: cubic-bezier(0.4, 0, 1, 1);
+  --d-micro: 120ms;
+  --d-fast: 180ms;
+  --d-base: 280ms;
+  --d-slow: 560ms;
+  --d-hero: 900ms;
+
+  /* Layout */
+  --container: 1320px;
+  --nav-h: 64px;
+
+  /* Z-index scale (systemic layers only) */
+  --z-scene-ui: 10;
+  --z-nav: 40;
+  --z-overlay: 50;
+  --z-skip: 60;
+}

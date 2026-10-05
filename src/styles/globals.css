@@ -1,0 +1,299 @@
+@import "tailwindcss" source("../");
+@import "./tokens.css";
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-raised: var(--bg-raised);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-petrol: var(--petrol);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-text: var(--text);
+  --color-muted: var(--text-muted);
+  --color-dim: var(--text-dim);
+  --color-signal: var(--signal);
+  --color-signal-ink: var(--signal-ink);
+  --color-ok: var(--ok);
+  --color-warn: var(--warn);
+  --color-crit: var(--crit);
+  --color-info: var(--info);
+
+  --radius-xs: var(--r-xs);
+  --radius-sm: var(--r-sm);
+  --radius-md: var(--r-md);
+  --radius-lg: var(--r-lg);
+
+  --font-sans: "Archivo Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono Variable", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  --ease-out-expo: var(--ease-out);
+  --ease-in-out-quart: var(--ease-in-out);
+}
+
+/* ---------- Base ---------- */
+@layer base {
+  html {
+    background: var(--bg);
+    color: var(--text);
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: calc(var(--nav-h) + 16px);
+    color-scheme: dark;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    background: var(--bg);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.6;
+    font-feature-settings: "ss01", "cv11";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: rgba(79, 216, 235, 0.3);
+    color: var(--text);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  button,
+  [role="button"],
+  a,
+  summary,
+  label[for] {
+    cursor: pointer;
+  }
+
+  button:disabled {
+    cursor: not-allowed;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--signal);
+    outline-offset: 2px;
+    border-radius: var(--r-xs);
+  }
+}
+
+/* ---------- Type ---------- */
+@utility font-display {
+  font-family: var(--font-sans);
+  font-stretch: 104%;
+  font-weight: 540;
+  @media (width >= 48rem) {
+    font-stretch: 116%;
+  }
+}
+
+@utility display-xl {
+  font-size: clamp(2rem, 3.6vw + 0.6rem, 4.125rem);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+}
+
+@utility display-lg {
+  font-size: clamp(2rem, 3.2vw + 0.4rem, 3.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+@utility display-md {
+  font-size: clamp(1.5rem, 1.6vw + 0.6rem, 2.125rem);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+}
+
+@utility label-mono {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.4;
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+}
+
+@utility num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Layout ---------- */
+@utility container-x {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: 16px;
+  @media (width >= 48rem) {
+    padding-inline: 24px;
+  }
+  @media (width >= 64rem) {
+    padding-inline: 40px;
+  }
+}
+
+/* ---------- Surfaces ---------- */
+@utility panel {
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-1);
+}
+
+@utility panel-inset {
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: calc(var(--r-md) - 6px);
+}
+
+@utility glass {
+  background: rgba(8, 13, 19, 0.72);
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+  @media (prefers-reduced-transparency: reduce) {
+    background: var(--bg-raised);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+@utility dot-grid {
+  background-image: radial-gradient(rgba(190, 220, 255, 0.09) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+@utility sr-only-focusable {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  &:focus,
+  &:focus-visible {
+    width: auto;
+    height: auto;
+    clip-path: none;
+    overflow: visible;
+  }
+}
+
+/* ---------- Telemetry marquee ---------- */
+@keyframes marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.marquee-track {
+  animation: marquee 60s linear infinite;
+}
+
+.marquee:hover .marquee-track,
+.marquee:focus-within .marquee-track,
+.marquee[data-paused="true"] .marquee-track {
+  animation-play-state: paused;
+}
+
+/* Live indicator: a single, slow, opacity-only beacon reserved for real live state. */
+@keyframes beacon {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+.beacon {
+  animation: beacon 2.4s var(--ease-in-out) infinite;
+}
+
+/* Loading bars used in buttons and panels (stepped, not spinning). */
+@keyframes bars {
+  0% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.25;
+  }
+}
+
+.loading-bars > span {
+  animation: bars 900ms steps(3, end) infinite;
+}
+.loading-bars > span:nth-child(2) {
+  animation-delay: 150ms;
+}
+.loading-bars > span:nth-child(3) {
+  animation-delay: 300ms;
+}
+
+/* Signal dash flowing along SVG connections. */
+@keyframes dash-flow {
+  to {
+    stroke-dashoffset: -40;
+  }
+}
+
+.flow-dash {
+  stroke-dasharray: 2 18;
+  animation: dash-flow 1.6s linear infinite;
+}
+
+/* Final CTA scan line: a slow ping-pong across the horizon. */
+@keyframes sweep {
+  from {
+    transform: rotate(-8deg);
+  }
+  to {
+    transform: rotate(-172deg);
+  }
+}
+
+.horizon-sweep {
+  transform-origin: 0 0;
+  animation: sweep 18s var(--ease-in-out) infinite alternate;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .horizon-sweep {
+    animation: none !important;
+    transform: rotate(-62deg);
+  }
+  .marquee-track,
+  .beacon,
+  .loading-bars > span,
+  .flow-dash {
+    animation: none !important;
+  }
+  .marquee-track {
+    transform: none !important;
+  }
+}

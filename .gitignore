@@ -1,0 +1,7 @@
+node_modules
+dist
+*.local
+.DS_Store
+
+# Third-party agent skills (reinstall with: npx skills add, see skills-lock.json)
+.claude/skills/
